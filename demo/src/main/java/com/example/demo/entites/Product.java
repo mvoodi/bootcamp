@@ -1,53 +1,30 @@
 package com.example.demo.entites;
 
+
+import com.example.demo.enums.Type;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "products_table")
 public class Product {
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id){
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public String getCourse() {
-        return course;
-    }
-
-    public void setCourse(String course) {
-        this.course = course;
-    }
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String name;
-    private Integer age;
-    private String course;
+    private String created_date;
+    @Enumerated(EnumType.STRING)
+    private Type type;
+    private Integer prize;
+    private String description;
 
+    @ManyToOne()
+    User owner;
 }
